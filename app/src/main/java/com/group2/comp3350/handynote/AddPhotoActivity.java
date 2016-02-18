@@ -134,7 +134,29 @@ public class AddPhotoActivity extends Activity
         {
             e.printStackTrace();
         }
-        ImageView ivImage = new ImageView(this);
+        final ImageView ivImage = new ImageView(this);
+        ivImage.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if (zoomOut)
+                {
+                    Toast.makeText(getApplicationContext(), "NORMAL SIZE!", Toast.LENGTH_LONG).show();
+                    ivImage.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                                                                          LinearLayout.LayoutParams.WRAP_CONTENT));
+                    ivImage.setAdjustViewBounds(true);
+                    zoomOut = false;
+                } else
+                {
+                    Toast.makeText(getApplicationContext(), "FULLSCREEN!", Toast.LENGTH_LONG).show();
+                    ivImage.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                                                                          LinearLayout.LayoutParams.MATCH_PARENT));
+                    ivImage.setScaleType(ImageView.ScaleType.FIT_XY);
+                    zoomOut = true;
+                }
+            }
+        });
         // GradientDrawable gd = new GradientDrawable();
         // gd.setColor(0xFF00FF00); // Changes this drawbale to use a single color instead of a gradient
         //gd.setCornerRadius(5);
